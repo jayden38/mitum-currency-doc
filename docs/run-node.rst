@@ -3,26 +3,27 @@ Run a node
 
 Overview
 ----------------
-여기서 노드를 실행하기 위한 과정을 설명합니다.  
+
+Here we will explain the process for running the node.
 
 .. note::
 
-  * Digest API가 mitum-currency에 포함되어 있어 기본적으로 API 서비스를 제공합니다.
-  * Digest를 위한 설정은 `Configuration`_ 을 확인하여 주십시오.
-  * Digest를 설정하지 않으면, API 서비스를 위한 데이터를 따로 처리하여야 합니다.
+  * Digest API is included in Mitum currency, so API service is provided by default.
+  * Please check :ref:`node configure` for setting for Digest.
+  * If Digest is not set, data for API service must be processed separately.
 
-Node 설정하기
+Setting up Node
 ---------------------
-* 노드를 실행하기전 `configuration`_ 을 위해 tutorial.yml을 준비하여 주십시오.
+* Please prepare tutorial.yml for :ref:`node configure` before running node.
 
-Standalone 노드 실행하기
+Running the standalone node
 ----------------------------------
 
 Node init
 ..............
 
-* 먼저 genesis block과 genesis account을 먼저 생성하여야 합니다.
-* genesis block 생성을 통해서 main currency가 발행되고 genesis account의 balance에 저장됩니다.
+* First, the genesis block and genesis account must be created.
+* The main currency is issued through the creation of the genesis block and stored in the balance of the genesis account.
 * tutorial.yml : config file
 
 .. code-block:: sh
@@ -40,14 +41,14 @@ Node init
 
 .. note::
 
-    * 이미 저장된 block 데이터가 발견될 경우, ``already blocks exist, clean first`` 라는 error가 발생합니다.
-    * error를 무시하고 초기화하려면, ``--force`` option 추가하여 실행합니다.
+    * If already saved block data is found, an error ``already blocks exist, clean first'' occurs.
+    * To reset the error and ignore it, run it by adding the ``--force`` option.
     * ``$ ./bin/mc --log-level info init ./tutorial.yml --force``
 
 Node run
 ..............
 
-* 노드를 실행하면 blockchain의 저장상태와 consensus 참여 상태에 SYNC, JOIN, CONSENSUS 모드로 변경되며 block 생성을 시작합니다.
+* When the node is run, the blockchain's storage status and consensus participation status are changed to SYNC, JOIN, and CONSENSUS modes, and block creation starts.
 
 .. code-block:: sh
 
@@ -65,12 +66,12 @@ Node run
     2021-03-29T09:17:53.655096322Z INF new block stored block={"hash":"3secyQ9KYNVag2E4hhVShofM3vBYxZiBGWNq9fXEsn2H","height":3,"round":0} elapsed=25.89425 module=basic-consensus-state proposal_hash=GndqA1bQeufDmgkm8HoJ4thGn5qAmMxXgwr6Xd9PAhCr voteproof_id=2aw8Upm4pkwq5Pu16hMpcHxycPBtV4qQs1365PWc2a9E
     2021-03-29T09:17:53.667322322Z INF block digested block=3 module=digester
 
-* log level을 info로 설정하면 새로 생성되는 block의 정보를 쉽게 확인할 수 있습니다.
+* If you set the log level to info, you can easily check the information of the newly created block.
 
-Genesis account 확인
+Lookup genesis account
 ...........................
 
-* file system에 저장된 block 파일들을 통해서 genesis account 정보를 확인할 수 있습니다.
+* You can check genesis account information through block files saved in the file system.
 
 .. code-block:: sh
 
@@ -98,14 +99,14 @@ Genesis account 확인
       "balance:99999999999999999999"
     ]
 
-* *height*, ``0`` 에서 genesis account의 *address*, ``7xDhv3CyDAyzdnSEFMyGV78c85wYKjDbghpghbgn6mkv-a000:0.0.1`` 가 block에 저장.
-* Account 정보는 Digest API를 통해서도 확인가능합니다.
+* *height*, *address* of genesis account at ``0``, ``7xDhv3CyDAyzdnSEFMyGV78c85wYKjDbghpghbgn6mkv-a000:0.0.1`` is saved in block.
+* Account information can also be checked through Digest API.
 
-Digest API를 사용하여 확인하기
-...................................
+Lookup using the Digest API
+---------------------------------
 
-* Digest 설정 `Configuration <configuration>`_ 에 따른 api 주소는 https://localhost:54322 입니다.
-* node info를 통해서 genesis account 확인
+* The api address according to the digest setting :ref:`node configure` is https://localhost:54322.
+* Check genesis account through node info
 
 .. code-block:: sh
 
@@ -131,7 +132,7 @@ Digest API를 사용하여 확인하기
         "balance": "999"
     }
 
-* account 정보를 통해서 Genesis Account 확인
+* Check genesis account through account information
 
 .. code-block:: sh
 

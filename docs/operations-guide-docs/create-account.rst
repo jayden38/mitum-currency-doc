@@ -1,17 +1,20 @@
-Account 생성하기
+Create Account
 ==================================
 
-* create-account은 새로운 account를 생성하는 operation입니다.
-* publickey를 새로운 account의 key로 등록합니다. key들의 weight 합은 ``100`` 이 되어야 합니다.
+create-account Operation
+--------------------------   
+
+* ``create-account`` is a operation which create new account.
+* Register publickey as the key of a new account. The sum of the weights of the keys should be ``100``.
 
 .. code-block:: sh
 
     $ mitum-currency seal create-account --network-id=NETWORK-ID-FLAG <privatekey> <sender> <currency> <big>
 
-* ac0, ac1 2 개의 account를 생성하는 과정을 예제로 진행하겠습니다.
-* account 당 한 개의 key를 등록하는 경우, 2 개의 public key가 필요합니다.
-* keypair를 생성하는 방법은 `여기 <keypair>`_ 에서 확인하여 주십시오.
-* Account ac0을 생성하는 operation은 다음과 같이 만들 수 있습니다.
+* We will proceed with the process of creating two accounts, ac0 and ac1 as an example.
+* When registering one key per account, two public keys are required.
+* For how to create a keypair, please refer to :ref:`create keypair` .
+* The operation that creates account ac0 are as follows.
 
 .. code-block:: sh
 
@@ -67,7 +70,7 @@ Account 생성하기
       ]
     }
 
-* Account ``ac1`` 을 생성하는 operation은 다음과 같이 만들 수 있습니다.
+* The operation to create ㅁccount ``ac1`` is as follows.
 
 .. code-block:: sh
 
@@ -123,13 +126,12 @@ Account 생성하기
       ]
     }
 
-* 위 json 메세지들을 seal에 담아 노드에 전달합니다.
+* The above json messages are put in the seal and sent to the node.
 
 .. note::
-    * mitum currency에서는 한 account가 signing한 operation을 두 개 이상 한 block에 처리하지 않음
-    * 예를 들어, ``ac0`` 에서 ``ac1``, ``ac2`` 로 각각 ``5`` amount를 보내는 두 개의 operation을 동시에 처리할 수 없음
-    * 이와 같은 경우에는 먼저 도착한 operation만 처리하고 나머지는 무시됨.
-
+    * In Mitum currency, two or more operations signed by one account are not processed in one block.
+    * For example, two operations that send ``5`` amount from ``ac0'' to ``ac1`` and ``ac2`` cannot be processed at the same time.
+    * In this case, only the operation that arrived first is processed and the rest are ignored.
 
 .. code-block:: sh
 
@@ -153,7 +155,7 @@ Account 생성하기
     $ echo $?
     0
 
-* Operation의 block 저장여부는 digest API에 Operation의 ``fact.hash`` 조회를 통해 확인할 수 있습니다.
+* Whether the operation block is saved can be checked through the ``fact.hash`` of operation inquiry in the digest API.
 
 .. code-block:: sh
 
@@ -246,5 +248,5 @@ Account 생성하기
       }
     }
 
-* operation의 처리 성공 여부는 api를 통하여 확인할 수 있습니다.
-* 자세한 내용은 :ref:`Operation Reason` 을 참고하여 주십시오.
+* Whether the operation is successfully processed can be checked through the api.
+* For more information, please refer to :ref:`Operation Reason`.

@@ -2,10 +2,10 @@ Installation
 =============
 
 
-Mitum Currency 실행파일 build하기
-----------------------------------
+Building Mitum Currency executable file
+-----------------------------------------
 
-Go 언어를 설치한 후, Mitum Currency 소스코드를 `download <https://github.com/spikeekips/mitum-currency>`_ 하십시오.
+After installing the Golang, please download the `Mitum Currency source code <https://github.com/spikeekips/mitum-currency>`_ .
 
 .. code-block:: sh
 
@@ -13,7 +13,7 @@ Go 언어를 설치한 후, Mitum Currency 소스코드를 `download <https://gi
     $ git clone https://github.com/spikeekips/mitum-currency.git src
 
 
-build을 통해 실행파일을 생성하십시오.
+Build the executable file.
 
 .. code-block:: sh
     

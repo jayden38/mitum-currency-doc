@@ -1,12 +1,14 @@
+.. _node configure:
+
 Configuration
 =============
 
-* 노드 setting을 위한 configuration을 yml 형식으로 설정합니다.
+* The configuration for node setting is written in YAML.
 
 address
 -------------
 
-* local node의 address(url 주소에 대한 별칭)
+* local node의 address(alias for url address)
 
 .. code-block:: yml
 
@@ -15,11 +17,10 @@ address
 genesis-operations
 ------------------------
 
-* genesis-operation은 네트워크 초기화할 때 실행되는 genesis operation에 대한 설정입니다.
-* genesis-operation은 최초 생성되는 블록에 대한 내용을 갖고 있습니다.
-* currency model에서는 main currency와 genesis account에 대한 정보를 설정하여 줍니다.
-* genesis account의 keypair(key, weight, threshold 값)를 등록하고 
-* 생성될 currency의 초기물량(balance)과 Currency ID, 수수료 정책을 지정하여 줍니다.
+* genesis-operation is a setting for the genesis operation that is executed when the network is initialized.
+* genesis-operation contains the contents of the block that is initially created.
+* In the currency model, information on the main currency and genesis account must be set.
+* It registers the information (key, weight, threshold value) about the keys of the genesis account, and specifies the initial balance, currency ID, and fee policy of the currency to be created.
 
 .. code-block:: yml
 
@@ -39,8 +40,8 @@ genesis-operations
 network
 ---------
 
-* 네트워크에서 사용되는 노드의 domain 또는 ip주소를 지정합니다.
-* 노드 또는 클라이언트로부터 메세지를 받는 주소이며 quic 통신 프로토콜을 사용합니다.
+* Specify the domain address or IP address of the node used in the network.
+* Address to receive messages from node or client, using quic communication protocol.
 
 .. code-block:: yml
 
@@ -50,23 +51,23 @@ network
         cert-key: mitum.key
         cert: mitum.crt
 
-* Mitum 노드는 기본적으로 CA signed certificate(public certificate)를 사용하는 것이 기본입니다.
-* Network config에서 certificate 관련된 설정을 하지 않으면 노드는 self-signed certifate를 사용합니다.
-* Mitum 노드가 self-signed certifate를 사용하는 경우, network-connection-tls-insecure: true 를 추가로 설정해주어야 합니다.
+* Mitum nodes use CA signed certificate (public certificate) by default.
+* If certificate related settings are not made in Network config, the node uses self-signed certifate.
+* If the Mitum node uses self-signed certifate, network-connection-tls-insecure: true must be additionally set.
 
 .. code-block:: yml
 
     policy:
         network-connection-tls-insecure: true
 
-* network-connection-tls의 기본값은 false입니다.
-* 다른 mitum 노드들이 self-signed certificate를 사용하고 있다면, 이 설정을 true로 해야 정상적으로 메세지를 주고 받을 수 있습니다.
+* The default value of network-connection-tls is false.
+* If other Mitum nodes are using self-signed certificates, this setting must be set to true to send and receive messages.
 
 network-id
 ------------
 
-* Network id는 네트워크를 구분하는 식별자와 같은 역할을 합니다. 
-* 같은 네트워크 위에 있는 노드들은 모두 동일한 network-id 값을 가집니다.
+* Network id acts like an identifier that identifies a network.
+* All nodes on the same network have the same network-id value.
 
 .. code-block:: yml
 
@@ -75,8 +76,8 @@ network-id
 keypair
 ---------
 
-* 노드의 private key, public key를 입력합니다.
-* keypair를 생성하는 방법은 여기를 참고하십시오.
+* Enter the node's private key and public key.
+* See :ref:`create keypair` to learn how to create a key pair.
 
 .. code-block:: yml
 
@@ -86,7 +87,7 @@ keypair
 storage
 ----------
 
-* blockchain 데이터 storage의 file system 경로와 mongodb database address를 지정합니다.
+* Specify the file system path and mongodb database address of blockchain data storage.
 
 .. code-block:: yml
 
@@ -97,11 +98,10 @@ storage
             uri: mongodb://127.0.0.1:27017/n0_mc
 
 suffrage > nodes
---------
+-----------------
 
-* consensus에 참여하는 suffrage node에 대한 address를 설정합니다.
-* local node의 address가 n0-010a:0.0.1 라고 한다면, 
-* local node를 포함하여 n1, n2, n3 노드를 모두 suffrage에 포함하는 경우 다음과 같이 설정할 수 있습니다.
+* Set addresses for suffrage nodes participating in consensus.
+* If the alias name of the local node is n0-010a:0.0.1 and the local node and all n1, n2, and n3 nodes are included in the suffrage nodes, it can be set as follows.
 
 .. code-block:: yml
 
@@ -112,14 +112,12 @@ suffrage > nodes
             - n2-010a:0.0.1
             - n3-010a:0.0.1
 
-* local node인 n0노드를 suffrage > nodes에 포함시키지 않으면 
-* local node는 None-Suffrage node가 되어 Syncing node로서의 역할만을 합니다.
-* Syncing node는 consensus에 참여하지 않고 생성된 block data를 sync하기만 합니다.
-* None-suffrage node는 operation을 담고 있는 seal만을 처리합니다.
-* None-suffrage node는 노드간 voting과 관련된 ballot과 proposal은 처리하지 않습니다.
-* Node-suffrage node가 operation seal을 저장하면 suffrage node들에게 broadcast합니다.
-* None-suffrage node, 즉 local node가 suffrage node에 설정되지 않은 경우,
-* 다른 suffrage node들을 설정하지 않은 경우, operation seal도 처리활 수 없습니다.
+* If the n0 node, which is a local node, is not included in the suffrage nodes, the local node becomes a None-Suffrage node and serves only as a syncing node.
+* The Syncing node does not participate in consensus and only syncs the generated block data.
+* The None-suffrage node handles only the seal containing the operation.
+* The None-suffrage node does not process ballots and proposals related to voting between nodes.
+* When the node-suffrage node stores the operation seal, it broadcasts the seal to the suffrage nodes.
+* If the None-suffrage node does not add other nodes to the suffrage node, or does not configure other suffrage nodes, operation seal cannot be processed.
 
 .. code-block:: yml
 
@@ -132,9 +130,9 @@ suffrage > nodes
 sync-interval
 -----------------
 
-* None-suffrage node는 block data를 주기적으로 sync합니다.
-* Default interval은 10 second입니다.
-* sync-interval 설정을 통해서 interval 값을 바꿀 수 있습니다.
+* None-suffrage node periodically syncs block data.
+* The default interval is 10 seconds.
+* You can change the interval value through the sync-interval setting.
 
 .. code-block:: yml
 
@@ -143,8 +141,8 @@ sync-interval
 nodes
 -------
 
-* blockchain 네트워크에서 known 노드들의 address(주소에 대한 별칭), public key, url(ip 주소)를 입력합니다.
-* 작성하지 않은 경우 standalone 노드로 동작합니다.
+* Write the address (alias for the address), public key, and url (ip address) of known nodes in the blockchain network.
+* If not written, it operates as a standalone node.
 
 .. code-block:: yml
 
@@ -162,7 +160,7 @@ nodes
 digest
 --------
 
-API로 제공할 데이터를 저장하기 위한 mongodb 주소와 API 접근 ip주소를 지정합니다.
+Specify the mongodb address that stores the data to be provided by the API and the IP address of the API access.
 
 .. code-block:: yml
 

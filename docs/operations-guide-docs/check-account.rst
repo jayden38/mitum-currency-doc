@@ -1,21 +1,21 @@
-Account 확인하기
-================
+Lookup account 
+===================
 
 Prerequisite
----------------------
+--------------
 
 * *curl*
-    * cli로 api 조회하기 위해서 필요. https://curl.se
+    * This is a command line tool for interacting with API. https://curl.se
 
 * *jq*
-    * json 결과를 처리하기 위해서 필요. https://stedolan.github.io/jq/
+    * This is a command line tool for parsing json response. https://stedolan.github.io/jq/
 
 
 
-Genesis account 확인
+Genesis account lookup
 --------------------------------------------------------------------------------
 
-* local blockfs 에서 확인,
+* You can lookup genesis account from local blockfs.
 
 .. code-block:: sh
 
@@ -28,7 +28,7 @@ Genesis account 확인
 
 * ``99999999999999999977 = 99999999999999999999 - (2 create account: 10 * 2) - (2 fee: 1 * 2)``
 
-* digest에서 확인: account가 생성되었는지 확인
+* Also you can lookup genesis account from digest api.
 
 .. code-block:: sh
 
@@ -83,10 +83,10 @@ Genesis account 확인
       }
     }
 
-``ac0`` 확인
+``ac0``
 --------------------------------------------------------------------------------
 
-* local blockfs 에서 확인,
+* If you create account ac0, you can lookup account from local blockfs.
 
 .. code-block:: sh
 
@@ -97,7 +97,7 @@ Genesis account 확인
       "balance: 50"
     ]
 
-* digest에서 확인
+* Check in digest api
 
 .. code-block:: sh
 
@@ -149,71 +149,7 @@ Genesis account 확인
       }
     }
 
-``ac1`` 확인
---------------------------------------------------------------------------------
-
-* local blockfs 에서 확인,
-
-.. code-block:: sh
-
-    $ find blockfs -name "*-states-*" -print | xargs -n 1 zcat | jq '. | select(.key == "HWXPq5mBSneSsQis6BbrNT6nvpkafuBqE6F2vgaTYfAC-a000:balance") | [ "height: "+(.height|tostring), "state_key: " + .key, "balance: " + .value.value.amount]'
-    [
-      "height: 5",
-      "state_key: HWXPq5mBSneSsQis6BbrNT6nvpkafuBqE6F2vgaTYfAC-a000:balance",
-      "balance: 50"
-    ]
-
-.. code-block:: sh
-
-    $ curl --insecure -v https://localhost:54322/account/HWXPq5mBSneSsQis6BbrNT6nvpkafuBqE6F2vgaTYfAC-a000:0.0.1 | jq
-    {
-      "_hint": "a016:0.0.1",
-      "hint": {
-        "name": "mitum-currency-account-value",
-        "hint": "a018:0.0.1"
-      },
-      "_embedded": {
-        "_hint": "a018:0.0.1",
-        "hash": "ERWC4HZuagN6jsBwcJbPoz491qh8ioUmLBz2iMmTEBT4",
-        "address": "HWXPq5mBSneSsQis6BbrNT6nvpkafuBqE6F2vgaTYfAC-a000:0.0.1",
-        "keys": {
-          "_hint": "a004:0.0.1",
-          "hash": "HWXPq5mBSneSsQis6BbrNT6nvpkafuBqE6F2vgaTYfAC",
-          "keys": [
-            {
-              "_hint": "a003:0.0.1",
-              "weight": 100,
-              "key": "04a80bf7516f8b01385b680793d9d1eb3e69b8375a4ffc24a8413b13d7b5211f1aed315eec8851c391d6043fff0272b98484e5a5efa6c8815026a30029dba6c31c-0115:0.0.1"
-            }
-          ],
-          "threshold": 100
-        },
-        "balance": "50",
-        "height": 5,
-        "previous_height": -2
-      },
-      "_links": {
-        "self": {
-          "href": "/account/HWXPq5mBSneSsQis6BbrNT6nvpkafuBqE6F2vgaTYfAC-a000:0.0.1"
-        },
-        "operations": {
-          "href": "/account/HWXPq5mBSneSsQis6BbrNT6nvpkafuBqE6F2vgaTYfAC-a000:0.0.1/operations"
-        },
-        "operations:{offset}": {
-          "templated": true,
-          "href": "/account/HWXPq5mBSneSsQis6BbrNT6nvpkafuBqE6F2vgaTYfAC-a000:0.0.1/operations?offset={offset}"
-        },
-        "operations:{offset,reverse}": {
-          "templated": true,
-          "href": "/account/HWXPq5mBSneSsQis6BbrNT6nvpkafuBqE6F2vgaTYfAC-a000:0.0.1/operations?offset={offset}&reverse=1"
-        },
-        "block": {
-          "href": "/block/5"
-        }
-      }
-    }
-
 .. note::
-    * *address* 로 mongodb에서 **state** 를 조회할 때, ``:`` 뒷부분은 제거하고 key로 사용.
+    * When you lookup **state** by *address* from mongodb, remove the part after ``:`` of address and use it as key.
     * ``7xDhv3CyDAyzdnSEFMyGV78c85wYKjDbghpghbgn6mkv-a000:0.0.1`` → ``7xDhv3CyDAyzdnSEFMyGV78c85wYKjDbghpghbgn6mkv-a000``
     

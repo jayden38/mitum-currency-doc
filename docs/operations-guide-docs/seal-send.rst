@@ -1,8 +1,8 @@
 Seal Send
 ==================================
 
-* mitum-currency에서 생성된 operation은 Seal이라는 단위로 묶어서 전송합니다.
-* Seal을 전송하기 위해서는 Signature가 필요합니다. Signature 생성에 사용되는 keypair에 관련된 부분은 :ref:`Send message to node` 에서 Seal 부분을 참고하여 주십시오.
+* Operations created in Mitum currency are transmitted in units of seals.
+* Signature is required to transmit the seal. Refer to the Seal section in :ref:`Send message to node` for the part related to the keypair used for signature creation.
 
 .. code-block:: sh
 
@@ -59,12 +59,12 @@ Seal Send
     2021-05-04T07:24:57.267908Z INF trying to send seal module=command-send-seal
     2021-05-04T07:24:57.324527Z INF sent seal module=command-send-seal
 
-* 테스트를 위하여 local node로 전송하는 경우 tls 인증과 관련하여 오류가 발생하는 경우가 있습니다.
-* 이러한 경우, --tls-insecure=true로 하고 전송하십시오.
+* When sending to a local node for testing, an error may occur related to tls authentication.
+* In this case, set --tls-insecure=true and send.
 
 .. code-block:: sh
 
     $ ./bin/mc seal send --network-id=$NETWORK_ID $AC0_PRV --tls-insecure=true --seal=data.json --node=$NODE
 
-* operation의 처리 성공 여부는 api를 통하여 확인할 수 있습니다.
-* 자세한 내용은 :ref:`Operation Reason` 을 참고하여 주십시오.
+* Whether the operation is successfully processed can be checked through the api.
+* For more information, please refer to :ref:`Operation Reason`.

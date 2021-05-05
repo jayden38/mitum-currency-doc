@@ -1,23 +1,25 @@
-Currency 등록
+Register Currency
 ===================
 
-Currency-register
+currency-register Operation
 ---------------------------
 
-* mitum-currency seal currency-register --network-id=NETWORK-ID-FLAG --feeer=STRING --policy-new-account-min-balance=BIG <node privatekey> <currency-id> <genesis-amount> <genesis-account>
-* 새로운 currency를 등록하는 경우 설정이 필요한 항목
-* genesis account : 새로운 currency 등록과 함께 발행된 토큰이 등록될 account
-* genesis amount : 새롭게 발행될 토큰의 양
-* --policy-new-account-min-balance=<amount>를 설정하여야 함.
-* feeer : feeer는 세가지 정책 {nil, fixed, ratio} 중 선택할 수 있다.
-* nil은 fee 지불이 없는 경우, fixed는 고정된 양을 지불하게 하는 경우, ratio는 operation amount에 비례하여 지불하게 하는 경우이다.
-* fee 정책이 fixed인 경우 그에 따른 --feeer-fixed-receiver=<fee receiver account address>와 --feeer-fixed-amount=<fee amount>를 설정해주어야 함.
-* fee 정책이 ratio인 경우 그에 따른 --feeer-ratio-receiver=<fee receiver account address>와 --feeer-ratio-ratio=<fee ratio, multifly by operation amount>, --feeer-ratio-min=<minimum fee>, --feeer-ratio-max=<maximum fee>를 설정해주어야 함.
-* 새로운 currency를 등록하는 경우 consensus에 참여하는 suffrage 노드들의 signature가 consensus threshold(67%)를 넘어야만 실행이 됨.
+.. code-block:: sh
 
+    $ mitum-currency seal currency-register --network-id=NETWORK-ID-FLAG --feeer=STRING --policy-new-account-min-balance=BIG <node privatekey> <currency-id> <genesis-amount> <genesis-account>
 
-Currency-register 예제
----------------------------
+* When registering a new currency, the items that need to be set are as follows.
+* genesis account: account where the issued token will be registered with new currency registration
+* genesis amount: amount of newly issued tokens
+* --policy-new-account-min-balance=<amount> must be set.
+* feeer: The feeer can be selected from three policies {nil, fixed, ratio}.
+* nil is a case where there is no fee payment, fixed is a case where a fixed amount is paid, and a ratio is a case where a payment is made in proportion to the operation amount.
+* If the fee policy is fixed, you must set --feeer-fixed-receiver=<fee receiver account address> and --feeer-fixed-amount=<fee amount> accordingly.
+* If the fee policy is ratio, then --feeer-ratio-receiver=<fee receiver account address> and --feeer-ratio-ratio=<fee ratio, multifly by operation amount>, --feeer-ratio-min= <minimum fee>, --feeer-ratio-max=<maximum fee> must be set.
+* When registering a new currency, the signature of the suffrage nodes participating in consensus exceeds the consensus threshold (67%) to be executed.
+
+currency-register Opearation example
+--------------------------------------
 
 * genesis-account : ac1
 * genesis-amount : 9999999999999

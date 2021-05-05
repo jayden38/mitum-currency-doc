@@ -1,13 +1,16 @@
 Transfer coin
 ==================
 
-* transfer는 생성된 account들 사이에 coin을 송금하기 위해 사용됩니다.
+transfers Operation
+----------------------
+
+* Transfers Opearation is used to transfer coins between created accounts.
 
 .. code-block:: sh
 
     $ mitum-currency seal transfer --network-id=NETWORK-ID-FLAG <privatekey> <sender> <receiver> <currency> <big>
 
-* ``ac0`` 에서 ``ac1`` 으로 currency ``MCC``를 amount, ``3`` 전송하는 예제입니다.
+* This is an example of transferring the currency ``MCC`` amount, ``3`` from ``ac0`` to ``ac1``
 
 .. code-block:: sh
 
@@ -56,5 +59,5 @@ Transfer coin
     $ ./bin/mc seal transfer --network-id=$NETWORK_ID $AC0_PRV $AC0_ADDR $AC1_ADDR $CURRENCY_ID 3 | jq \
       ./bin/mc seal send --network-id=$NETWORK_ID $AC0_PRV --seal=-
 
-* operation의 처리 성공 여부는 api를 통하여 확인할 수 있습니다.
-* 자세한 내용은 :ref:`Operation Reason` 을 참고하여 주십시오.
+* Whether the operation is successfully processed can be checked through the api.
+* For more information, please refer to :ref:`Operation Reason`.

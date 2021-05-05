@@ -1,7 +1,15 @@
-Key 업데이트
+Update Key
 ==========================
 
-``ac0`` 의 key를 업데이트
+keyupdater Operation
+-----------------------
+
+* This is a method of replacing the key of an account that has already been created.
+* You can replace the existing registered publickey with a new publickey.
+* Update to new publickey does not change *address*.
+
+
+Update the key of ``ac0``
 --------------------------------------------------------
 
 .. code-block:: sh
@@ -11,7 +19,6 @@ Key 업데이트
     privatekey: cd2887a8e6937fd0f0d86285f99ec9769e0d12ddad51a208071d3da54a002044-0114:0.0.1
      publickey: 047cccc413bc0fbabb92da3fd01808252d29d99c8201df0dc6dbd3b972943f9523ac4144abe9e1bebf9a02c1a04aef5dcc5ded1a4c395dfb1aa23251e293f71efb-0115:0.0.1
 
-* 새로운 publickey로 업데이트하더라도 *address* 는 바뀌지 않음
 
 .. code-block:: sh
 
@@ -69,7 +76,7 @@ Key 업데이트
         "c741259e1444ce46e08c2489f3112fb8f0b9f85cb11c84ced9d948cef259ce74-0114:0.0.1" \
         --seal=-
 
-``ac0`` 의 새로운 key 확인
+Check the changed key of ``ac0``
 --------------------------------------------------------------------------------
 
 .. code-block:: sh

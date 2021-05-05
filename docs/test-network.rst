@@ -1,17 +1,19 @@
-Multi-node 실행
+.. _test nodes:
+
+Set up a Test Nodes
 ========================
 
-yml 설정 준비
+yml configuration
 -----------------
 
-4대의 노드르 운영하는 경우
-각각의 노드를 위한 별도의 yml 설정파일 준비한다.
-같은 네트워크 안에서 실행된다고 할 경우, 노드들은 설정파일의 다음 항목에 대하여 같은 값을 가져야 한다.
+In case of operating 4 nodes
+Prepare a separate yml configuration file for each node.
+If running in the same network, nodes should have the same value for the next item in the configuration file.
 
 * genesis-operations
 * network-id
 
-노드의 구성에 따라서 consensus에 참여하는 노드의 기본설정이 필요하다.
+Depending on the configuration of the node, it is necessary to configure the nodes participating in consensus.
 
 .. code-block:: yaml
 
@@ -27,8 +29,8 @@ yml 설정 준비
         url: quic://127.0.0.1:54333
 
 
-yml 설정 sample
------------------
+yml configuration example
+------------------------------
 
 .. code-block:: yml
 
@@ -179,15 +181,15 @@ yml 설정 sample
             url: quic://127.0.0.1:54332
 
 
-실행 순서
+Order of execution
 --------------------------------------------------------------------------------
 
-* Multi 노드를 실행할 경우, 최초 genesis block을 생성하는 첫번째 노드를 정해야 한다.
-* 첫번째 노드는 node init 명령을 통해서 genesis block을 생성한다.
-* genesis block을 생성하는 노드가 아닌 다른 노드들은 init 명령을 실행할 필요가 없다.
-* 첫번째 노드는 init 후 run 명령을 통해서 노드를 실행한다.
-* 다른 노드들도 run 명령을 통해서 각각 노드를 실행한다.
-* 다른 노드들은 sync 과정을 통해서 첫번째 노드의 블록을 따라가게 되고 이후 consensus 과정을 통해서 노드들은 블록을 생성하게 된다.
+* When executing a multi node, the first node that creates the first genesis block must be determined.
+* The first node creates the genesis block through the node init command.
+* Nodes other than the one that creates the genesis block do not need to execute the init command.
+* The first node executes the node through the run command after init.
+* Other nodes also execute each node through the run command.
+* Other nodes follow the block of the first node through the sync process, and the nodes create blocks through the consensus process.
 
 .. code-block:: sh
 

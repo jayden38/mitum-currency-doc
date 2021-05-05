@@ -1,9 +1,11 @@
-Currency policy 업데이트
-==================================================
+Updatae Currency policy
+=============================
 
-* ``mitum-currency seal currency-policy-updater --network-id=NETWORK-ID-FLAG --feeer=STRING <privatekey> <currency-id>``
-* 새로운 currency를 등록하는 경우 consensus에 참여하는 suffrage 노드들의 signature가 consensus threshold(67%)를 넘어야만 실행이 됨.
-* 먼저 등록한 currency의 info를 api를 통해서 조회.
+currency-policy-updater Operation
+-----------------------------------
+
+* First, get the info of the registered currency through api.
+* When updating a currency policy, the signature of the suffrage nodes participating in consensus exceeds the consensus threshold (67%) to be executed.
 
 .. code-block:: sh
   
@@ -51,15 +53,14 @@ Currency policy 업데이트
     }
 
 
-* currency-policy-updater를 통해서 정책을 변경할 수 있음. 변경가능한 항목은 다음과 같음.
-* feeer 정책과 --policy-new-account-min-balance
+* The policy that can be changed through currency-policy-updater is the fee-related policy and the minimum balance value when creating a new account.
 
 
-Currency-policy-updater 예제
-------------------------------
+Currency-policy-updater example
+--------------------------------
 
 * currency-id : MCC2
-* 수정할 정책
+* Policy to be updated
 * feeer : ratio
 * feeer-ratio-receiver : ac0
 * feeer-ratio-ratio : 0.5

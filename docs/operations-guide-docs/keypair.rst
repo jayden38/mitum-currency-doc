@@ -1,20 +1,22 @@
+.. _create keypair:
+
 Keypair
 ===============
 
-* keypair 생성을 통해서 private key와 public key가 만들어집니다.
-* 생성된 keypair는 account 생성, 노드의 keypair 등록, operation과 seal의 signature를 만드는데 사용됩니다.
+* Private key and public key are created through keypair generation.
+* The generated keypair is used to create an account, register a keypair of a node, and create a signature of operation and seal.
 
-Keypair 생성
+Create Keypair 
 --------------------
 
-* 새로운 keypair는 다음과 같이 생성할 수 있습니다.
+* New keypair can be created as follows.
 
 .. code-block:: sh
 
       $ ./bin/mc key new --type=<key type>
 
-* Mitum에서는 bitcoin, ethereum, stellar 형식의 keypair를 사용할 수 있습니다.
-* key type에 btc, ether, stellar를 선택할 수 있습니다. (default: btc)
+* In Mitum, you can use bitcoin, ethereum, and stellar keypairs.
+* You can select btc, ether, or stellar for the key type. (default: btc)
 
 .. code-block:: sh
 
@@ -26,10 +28,10 @@ Keypair 생성
 Multi Sig Account
 ------------------------
 
-* Account는 Mitum currency에서 currency와 balance를 갖고 있는 data structure입니다.
-* Account는 address라는 고유값을 갖고 있어 이를 통해 식별할 수 있습니다.
-* 사용자의 Account에 대한 authentication을 위해서 public key를 등록합니다.
-* Mitum currency의 account는 multi signature가 가능하기 때문에 여러 개의 public key를 등록할 수 있습니다.
+* Account is a data structure that has currency and balance in Mitum currency.
+* Account has a unique value called address and can be identified through this.
+* Register a public key for user's Account authentication.
+* Mitum currency accounts can register multiple public keys because multi signatures are possible.
 
 .. csv-table::
    :widths: 30, 150
@@ -39,24 +41,25 @@ Multi Sig Account
    "keys", "{key: rd89Gx..., weight: 50}, {key: skRdC6..., weight: 50}"
    "balance", "{currency: MCC, amount: 10000}, {currency: MCC2, amount: 20000}"
 
-* Account에는 threshold값을 설정합니다. 1 < thresohold <= 100.
-* key들의 weight 합은 100이 되어야 합니다.
-.. csv-table:: "key가 한 개만 있는 경우"
+* Set the threshold value in Account. 1 <thresohold <= 100.
+* The sum of the weights of the keys should be 100.
+* 
+.. csv-table:: "case with only one key"
     :widths: 30, 300
 
     "keys", "{key: rd89Gx..., weight: 100}                                                           "
 
-.. csv-table:: "key가 여러개 있는 경우"
+.. csv-table:: "case with multiple keys"
     :widths: 30, 300
 
     "keys", "{key: rd89Gx..., weight: 40}, {key: skRdC6..., weight: 30}, {key: mymMwq..., weight: 30}"
 
-* 같은 *publickey* 의 조합에서도 *weight* 나 *threshold* 가 다르면 *address* 는 다른 값을 갖게 됩니다.
+* Even in the same *publickey* combination, *address* will have different values if *weight* or *threshold* are different.
 
-Address 확인
+Check Address
 ---------------
 
-* public key에서 address를 확인하는 방법은 다음과 같습니다.
+* How to check the address in the public key is as follows.
 
 .. code-block:: sh
 
