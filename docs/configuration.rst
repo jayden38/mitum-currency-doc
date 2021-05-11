@@ -51,17 +51,6 @@ network
         cert-key: mitum.key
         cert: mitum.crt
 
-* Mitum nodes use CA signed certificate (public certificate) by default.
-* If certificate related settings are not made in Network config, the node uses self-signed certifate.
-* If the Mitum node uses self-signed certifate, network-connection-tls-insecure: true must be additionally set.
-
-.. code-block:: yml
-
-    policy:
-        network-connection-tls-insecure: true
-
-* The default value of network-connection-tls is false.
-* If other Mitum nodes are using self-signed certificates, this setting must be set to true to send and receive messages.
 
 network-id
 ------------
@@ -143,19 +132,22 @@ nodes
 
 * Write the address (alias for the address), public key, and url (ip address) of known nodes in the blockchain network.
 * If not written, it operates as a standalone node.
+* Mitum nodes use CA signed certificate (public certificate) by default.
+* If certificate related settings are not made in Network config, the node uses self-signed certifate.
+* If other Mitum node uses self-signed certificate, insecure=true should be set to all the node which use self-signed certificate.
 
 .. code-block:: yml
 
     nodes:
         - address: n1-010a:0.0.1
           publickey: ktJ4Lb6VcmjrbexhDdJBMnXPXfpGWnNijacdxD2SbvRM-0113:0.0.1
-          url: quic://127.0.0.1:54331
+          url: quic://127.0.0.1:54331?insecure=true
         - address: n2-010a:0.0.1
           publickey: wfVsNvKaGbzB18hwix9L3CEyk5VM8GaogdRT4fD3Z6Zd-0113:0.0.1
-          url: quic://127.0.0.1:54332
+          url: quic://127.0.0.1:54332?insecure=true
         - address: n3-010a:0.0.1
           publickey: vAydAnFCHoYV6VDUhgToWaiVEtn5V4SXEFpSJVcTtRxb-0113:0.0.1
-          url: quic://127.0.0.1:54333
+          url: quic://127.0.0.1:54333?insecure=true
 
 digest
 --------
@@ -172,7 +164,7 @@ Specify the mongodb address that stores the data to be provided by the API and t
             cert-key: mitum.key
             cert: mitum.crt
 
-config example
+config example (standalone node)
 ----------------
 
 .. code-block:: yml

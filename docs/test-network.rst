@@ -17,16 +17,23 @@ Depending on the configuration of the node, it is necessary to configure the nod
 
 .. code-block:: yaml
 
+    suffrage:
+        nodes:
+            - n0-010a:0.0.1
+            - n1-010a:0.0.1
+            - n2-010a:0.0.1
+            - n3-010a:0.0.1
+
     nodes:
         - address: n1-010a:0.0.1
         publickey: ktJ4Lb6VcmjrbexhDdJBMnXPXfpGWnNijacdxD2SbvRM-0113:0.0.1
-        url: quic://127.0.0.1:54331
+        url: quic://127.0.0.1:54331?insecure=true
         - address: n2-010a:0.0.1
         publickey: wfVsNvKaGbzB18hwix9L3CEyk5VM8GaogdRT4fD3Z6Zd-0113:0.0.1
-        url: quic://127.0.0.1:54332
+        url: quic://127.0.0.1:54332?insecure=true
         - address: n3-010a:0.0.1
         publickey: vAydAnFCHoYV6VDUhgToWaiVEtn5V4SXEFpSJVcTtRxb-0113:0.0.1
-        url: quic://127.0.0.1:54333
+        url: quic://127.0.0.1:54333?insecure=true
 
 
 yml configuration example
@@ -55,19 +62,26 @@ yml configuration example
     privatekey: Kxt22aSeFzJiDQagrvfXPWbEbrTSPsRxbYm9BhNbNJTsrbPbFnPA-0112:0.0.1
     publickey: skRdC6GGufQ5YLwEipjtdaL2Zsgkxo3YCjp1B6w5V4bD-0113:0.0.1
     storage:
-        blockfs:
+        blockdata:
             path: ./n0_data/blockfs
-        uri: mongodb://127.0.0.1:27017/n0_mc
+        database:
+            uri: mongodb://127.0.0.1:27017/n0_mc
+    suffrage:
+        nodes:
+            - n0-010a:0.0.1
+            - n1-010a:0.0.1
+            - n2-010a:0.0.1
+            - n3-010a:0.0.1
     nodes:
         - address: n1-010a:0.0.1
         publickey: ktJ4Lb6VcmjrbexhDdJBMnXPXfpGWnNijacdxD2SbvRM-0113:0.0.1
-        url: quic://127.0.0.1:54331
+        url: quic://127.0.0.1:54331?insecure=true
         - address: n2-010a:0.0.1
         publickey: wfVsNvKaGbzB18hwix9L3CEyk5VM8GaogdRT4fD3Z6Zd-0113:0.0.1
-        url: quic://127.0.0.1:54332
+        url: quic://127.0.0.1:54332?insecure=true
         - address: n3-010a:0.0.1
         publickey: vAydAnFCHoYV6VDUhgToWaiVEtn5V4SXEFpSJVcTtRxb-0113:0.0.1
-        url: quic://127.0.0.1:54333
+        url: quic://127.0.0.1:54333?insecure=true
 
 .. code-block:: yml
 
@@ -92,19 +106,26 @@ yml configuration example
     privatekey: L4R2AZVmxWUiF2FrNEFi6rHwCTdDLQ1JuQHji69SbMcmWUdNMUSF-0112:0.0.1
     publickey: ktJ4Lb6VcmjrbexhDdJBMnXPXfpGWnNijacdxD2SbvRM-0113:0.0.1
     storage:
-        blockfs:
+        blockdata:
             path: ./n1_data/blockfs
-        uri: mongodb://127.0.0.1:27018/n1_mc
+        database:
+            uri: mongodb://127.0.0.1:27018/n1_mc
+    suffrage:
+        nodes:
+            - n0-010a:0.0.1
+            - n1-010a:0.0.1
+            - n2-010a:0.0.1
+            - n3-010a:0.0.1
     nodes:
         - address: n0-010a:0.0.1
         publickey: skRdC6GGufQ5YLwEipjtdaL2Zsgkxo3YCjp1B6w5V4bD-0113:0.0.1
-        url: quic://127.0.0.1:54330
+        url: quic://127.0.0.1:54330?insecure=true
         - address: n2-010a:0.0.1
         publickey: wfVsNvKaGbzB18hwix9L3CEyk5VM8GaogdRT4fD3Z6Zd-0113:0.0.1
-        url: quic://127.0.0.1:54332
+        url: quic://127.0.0.1:54332?insecure=true
         - address: n3-010a:0.0.1
         publickey: vAydAnFCHoYV6VDUhgToWaiVEtn5V4SXEFpSJVcTtRxb-0113:0.0.1
-        url: quic://127.0.0.1:54333
+        url: quic://127.0.0.1:54333?insecure=true
 
 .. code-block:: yml
 
@@ -129,19 +150,26 @@ yml configuration example
     privatekey: L3Szj4t3w33YLsGFGeaB3v1vwae82yp5KWPcT7v1Y4WyQkAH7eCR-0112:0.0.1
     publickey: wfVsNvKaGbzB18hwix9L3CEyk5VM8GaogdRT4fD3Z6Zd-0113:0.0.1
     storage:
-        blockfs:
+        blockdata:
             path: ./n2_data/blockfs
-        uri: mongodb://127.0.0.1:27019/n2_mc
+        database:
+            uri: mongodb://127.0.0.1:27019/n2_mc
+    suffrage:
+        nodes:
+            - n0-010a:0.0.1
+            - n1-010a:0.0.1
+            - n2-010a:0.0.1
+            - n3-010a:0.0.1
     nodes:
         - address: n0-010a:0.0.1
             publickey: skRdC6GGufQ5YLwEipjtdaL2Zsgkxo3YCjp1B6w5V4bD-0113:0.0.1
-            url: quic://127.0.0.1:54330
+            url: quic://127.0.0.1:54330?insecure=true
         - address: n1-010a:0.0.1
             publickey: ktJ4Lb6VcmjrbexhDdJBMnXPXfpGWnNijacdxD2SbvRM-0113:0.0.1
-            url: quic://127.0.0.1:54331
+            url: quic://127.0.0.1:54331?insecure=true
         - address: n3-010a:0.0.1
             publickey: vAydAnFCHoYV6VDUhgToWaiVEtn5V4SXEFpSJVcTtRxb-0113:0.0.1
-            url: quic://127.0.0.1:54333
+            url: quic://127.0.0.1:54333?insecure=true
 
 .. code-block:: yml
 
@@ -166,19 +194,26 @@ yml configuration example
     privatekey: KwxfBSzwevSggJz2grf8FWrjvXzrctY3WismTy6GNdJpWXe5tF5L-0112:0.0.1
     publickey: vAydAnFCHoYV6VDUhgToWaiVEtn5V4SXEFpSJVcTtRxb-0113:0.0.1
     storage:
-        blockfs:
+        blockdata:
             path: ./n3_data/blockfs
-        uri: mongodb://127.0.0.1:27020/n3_mc
+        database:
+            uri: mongodb://127.0.0.1:27020/n3_mc
+    suffrage:
+        nodes:
+            - n0-010a:0.0.1
+            - n1-010a:0.0.1
+            - n2-010a:0.0.1
+            - n3-010a:0.0.1
     nodes:
         - address: n0-010a:0.0.1
             publickey: skRdC6GGufQ5YLwEipjtdaL2Zsgkxo3YCjp1B6w5V4bD-0113:0.0.1
-            url: quic://127.0.0.1:54330
+            url: quic://127.0.0.1:54330?insecure=true
         - address: n1-010a:0.0.1
             publickey: ktJ4Lb6VcmjrbexhDdJBMnXPXfpGWnNijacdxD2SbvRM-0113:0.0.1
-            url: quic://127.0.0.1:54331
+            url: quic://127.0.0.1:54331?insecure=true
         - address: n2-010a:0.0.1
             publickey: wfVsNvKaGbzB18hwix9L3CEyk5VM8GaogdRT4fD3Z6Zd-0113:0.0.1
-            url: quic://127.0.0.1:54332
+            url: quic://127.0.0.1:54332?insecure=true
 
 
 Order of execution

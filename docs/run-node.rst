@@ -49,6 +49,7 @@ Node run
 ..............
 
 * When the node is run, the blockchain's storage status and consensus participation status are changed to SYNC, JOIN, and CONSENSUS modes, and block creation starts.
+* 
 
 .. code-block:: sh
 
@@ -67,6 +68,28 @@ Node run
     2021-03-29T09:17:53.667322322Z INF block digested block=3 module=digester
 
 * If you set the log level to info, you can easily check the information of the newly created block.
+* `--log` command line option can collect logs to the specific files.
+* Mitum dumps huge debugging log messages, including quic(http) request message like this,
+
+.. code-block:: sh
+
+    2021-05-06T17:43:36.072520781Z DBG workspace/mitum/src/network/http.go:61 > request content-length=1647 content-type= duration=6.326587 headers={"X-Mitum-Encoder-Hint":["0101:0.0.1"]} host=127.0.0.1:54321 ip=127.0.0.1 method=POST module=network-quic-primitive-server proto=HTTP/3 remote=127.0.0.1:60614 req_id=c2a2li0m57f5lqgar0dg size=0 status=200 url=/seal?showme=1 user_agent="quic-go HTTP/3"
+
+
+* `--network-log` command line option can collect these requests messsage to the specific files.
+
+.. code-block:: sh
+
+    $ ./mitum-currency run node \
+        --log-level debug \
+        --log-format json \
+        --log ./mitum.log \
+        --network-log ./mitum-request.log
+
+
+* Multiple file can be set to `--network-log` and `--log`.
+* In mitum-currency, `--network-log` option will also collect the requests log from digest API(http2) 
+* `--network-log` option is only available in `node run` commnad.
 
 Lookup genesis account
 ...........................
