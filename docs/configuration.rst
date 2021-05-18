@@ -52,6 +52,94 @@ network
         cert: mitum.crt
 
 
+network > rate-limit 
+----------------------
+
+* Basially API interface of internet service allows to connect from client without restriction.
+* but too many requests to service does harm to the performance of service
+* To maintain the service to be stable, rate limit can be applied to the API service.
+* See `Rate limiting <https://en.wikipedia.org/wiki/Rate_limiting>`_
+* Mitum supports quic based API service for communication within nodes(even none-suffrages)
+* and Mitum-currency additionally supports http2 based API service(called digest).
+* ``rate-limit`` applied to these API services.
+
+.. code-block:: yml
+
+    network:
+        bind: quic://0.0.0.0:54341
+        url: quic://127.0.0.1:54341
+
+        rate-limit:
+            cache: "memory:?prefix=showme"
+            preset:
+                bad-nodes:
+                    new-seal: 3/2m
+                    blockdata: 4/m
+            3.3.3.3:
+                preset: bad-nodes
+            4.4.4.4/24:
+                preset: bad-nodes
+                blockdata: 5/m
+            127.0.0.1/24:
+                preset: suffrage
+
+* cache: cache for requests. At this time, supports "memory:" and "redis://<redis server>"
+  
+    * "memory:": memory cache
+    
+    * "redis://<redis server>": cached in redis server
+
+* preset: pre defined rate limit settings. 
+  
+    * For mitum, ``suffrage`` and ``world`` presets are already defined. See `launch/config/ratelimit.go <https://github.com/spikeekips/mitum/blob/master/launch/config/ratelimit.go>`_ in the `source code <https://github.com/spikeekips/mitum>`_.
+    * You can make your own rate limit setting like ``bad-nodes``.
+
+* Rules:
+
+    * Rate-limit Settings for a specific IP
+  
+    * Rules consist of IP address(or IP address range), preset and detailed rate-limit settings.
+  
+    * The IP address can be a single value or a range of IP addresses expressed in CIDR notation.
+
+    * example : ``3.3.3.3``, ``4.4.4.4/24``, ``127.0.0.1/24``
+
+    * Rate limit can be set through ``preset`` and additional ``limits``.
+
+    * ``preset`` can be pre-defined preset like ``suffrage``, ``world`` or user-defined preset like ``bad-nodes``
+    
+    * Additional limit such as ``blockdata: 5/m`` can be added to the preset.
+
+    * Rules will be checked by the defined order. The upper rule will be checked first.
+
+* detailed limit:
+
+    * The name of the API interface for mitum, such as ``new-seal``, used to set the limit can be found in ``RateLimitHandleMap`` (`launch/config/ratelimit.go <https://github.com/spikeekips/mitum/blob/master/launch/config/ratelimit.go>`_).
+
+    * The name of the API interface for mitum-currency can be found in ``RateLimitHandlerMap`` (`digest/handler.go <https://github.com/spikeekips/mitum-currency/blob/master/digest/handler.go>`_).
+
+    * ``new-seal: 3/2m`` means ``new-seal`` interface allows 3 requests per 2 minutes to the specified IP or IP range.
+
+    * See the `manner of time duration <https://golang.org/pkg/time/#ParseDuration>`_.
+
+* Without any rules, by default no rate limit.
+  
+* A limit value less than zero means unlimited.
+
+.. code-block::
+
+    4.4.4.4/24:
+        preset: bad-nodes
+        blockdata: -1/m
+
+* The zero limit value means that the request is blocked.
+
+.. code-block::
+
+    4.4.4.4/24:
+        preset: bad-nodes
+        blockdata: 0/m
+
 network-id
 ------------
 

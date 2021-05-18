@@ -15,7 +15,7 @@ Operation
 Seal
 ------------
 
-* Seal is a collection of operations transmitted to the network. In other words, the Opearationd is contained in the seal and transmitted.
+* Seal is a collection of operations transmitted to the network. In other words, the Opearation is contained in the seal and transmitted.
 * To transmit the seal, a signature made with a private key is required.
 * To create Signature, you must use the private key created in Mitum's keypair package.
 * The private key used for the signature has nothing to do with the blockchain account. In other words, it doesn't have to be the private key used by the account.

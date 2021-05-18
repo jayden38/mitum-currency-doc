@@ -8,6 +8,9 @@ keyupdater Operation
 * You can replace the existing registered publickey with a new publickey.
 * Update to new publickey does not change *address*.
 
+``` mitum-currency seal key-updater --network-id=NETWORK-ID-FLAG <privatekey> <target> <currency> --key=KEY@...```
+
+* KEY : "<public key>,<weight>"
 
 Update the key of ``ac0``
 --------------------------------------------------------
@@ -15,15 +18,20 @@ Update the key of ``ac0``
 .. code-block:: sh
 
     ac0
-          hint: hint{type="ether-privatekey" code="0114" version="0.0.1"}
-    privatekey: cd2887a8e6937fd0f0d86285f99ec9769e0d12ddad51a208071d3da54a002044-0114:0.0.1
-     publickey: 047cccc413bc0fbabb92da3fd01808252d29d99c8201df0dc6dbd3b972943f9523ac4144abe9e1bebf9a02c1a04aef5dcc5ded1a4c395dfb1aa23251e293f71efb-0115:0.0.1
+    privatekey: L1jPsE8Sjo5QerUHJUZNRqdH1ctxTWzc1ue8Zp2mtpieNwtCKsNZ-0112:0.0.1
+     publickey: rd89GxTnMP91bZ1VepbkBrvB77BSQyQbquEVBy2fN1tV-0113:0.0.1
+       address: 4UM4CN8MZNyv26TK84486CX5X8bu9EUYbsWz5ovRsp1M-a000:0.0.1
+     
+
 
 
 .. code-block:: sh
 
-    $ ./bin/mc seal key-updater --network-id="mc; Thu 10 Sep 2020 03:23:31 PM UTC" \
-        "e4e236b0f02156a5c28031aa4608a299f44496be56081d09d0ef3667c33dbac3-0114:0.0.1" \
+    $ NETWORK_ID="mc; Tue 08 Dec 2020 07:22:18 AM KST"
+    $ AC0_PRV=L1jPsE8Sjo5QerUHJUZNRqdH1ctxTWzc1ue8Zp2mtpieNwtCKsNZ-0112:0.0.1
+    $ AC0_PUB=rd89GxTnMP91bZ1VepbkBrvB77BSQyQbquEVBy2fN1tV-0113:0.0.1
+    $ AC0_ADDR=4UM4CN8MZNyv26TK84486CX5X8bu9EUYbsWz5ovRsp1M-a000:0.0.1
+    $ ./bin/mc seal key-updater --network-id=$NETWORK_ID $AC0_PRV 
         "EinT1E7FADZN1y4WrQcWzyfM2UnG6FmaGQM2Q4qyJVn1-a000:0.0.1" \
         --key "047cccc413bc0fbabb92da3fd01808252d29d99c8201df0dc6dbd3b972943f9523ac4144abe9e1bebf9a02c1a04aef5dcc5ded1a4c395dfb1aa23251e293f71efb-0115:0.0.1,100" | jq
     {
